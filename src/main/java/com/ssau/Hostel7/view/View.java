@@ -6,4 +6,5 @@ public class View {
     public static class Hostel {}
     public static class Personal {}
     public static class RoomMigration {}
+    public static class Protected{}
 }
