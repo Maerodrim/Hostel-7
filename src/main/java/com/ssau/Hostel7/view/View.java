@@ -7,4 +7,5 @@ public class View {
     public static class Personal {}
     public static class RoomMigration {}
     public static class Protected{}
+    public static class CheckInQueue {}
 }

@@ -22,8 +22,8 @@ public class Room {
     private UUID idRoom;
     @Column(name = "idHostel", unique = false, nullable = true)
     @JsonView(View.Room.class)
-    private Integer idHostel;
-    @Column(name = "Number room", unique = false, nullable = true)
+    private UUID idHostel;
+    @Column(name = "Number room", unique = true, nullable = true)
     @JsonView(View.Room.class)
     private Integer numberRoom;
     @Column(name = "Room size", unique = false, nullable = true)

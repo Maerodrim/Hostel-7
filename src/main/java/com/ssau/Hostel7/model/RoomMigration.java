@@ -29,10 +29,10 @@ public class RoomMigration {
     private Time endDay;
     @Column(name = "Hostel Resident Id", unique = false, nullable = true)
     @JsonView(View.Hostel.class)
-    private Integer idHostelResident;
+    private UUID idHostelResident;
     @Column(name = "Room Id", unique = false, nullable = true)
     @JsonView(View.Hostel.class)
-    private Integer idRoom;
+    private UUID idRoom;
 
     @PrePersist
     public void generateId() {

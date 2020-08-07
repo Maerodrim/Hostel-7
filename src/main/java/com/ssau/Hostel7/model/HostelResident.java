@@ -42,7 +42,7 @@ public class HostelResident {
     private String сontractNumber;
     @Column(name = "Group number", unique = false, nullable = true)
     @JsonView(View.HostelResident.class)
-    private String GroupNumber;
+    private String groupNumber;
     @Column(name = "Password", unique = false, nullable = true)
     @JsonView(View.Protected.class)
     private String password;

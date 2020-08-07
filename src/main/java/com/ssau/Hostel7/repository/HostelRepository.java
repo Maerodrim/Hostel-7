@@ -9,4 +9,5 @@ import javax.persistence.Table;
 @Repository
 @Table(name = "Hostel")
 public interface HostelRepository extends CrudRepository<Hostel, Long> {
+    Hostel findByNumber(Integer number);
 }

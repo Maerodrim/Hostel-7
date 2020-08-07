@@ -21,7 +21,7 @@ public class Hostel {
     @Id
     @JsonView(View.Hostel.class)
     private UUID idHostel;
-    @Column(name = "number", unique = false, nullable = true)
+    @Column(name = "number", unique = true, nullable = true)
     @JsonView(View.Hostel.class)
     private Integer number;
     @OneToMany

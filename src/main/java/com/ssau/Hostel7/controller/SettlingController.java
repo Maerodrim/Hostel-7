@@ -11,14 +11,11 @@ import com.ssau.Hostel7.repository.HostelResidentRepository;
 import com.ssau.Hostel7.repository.SettlingInDormsRepository;
 import com.ssau.Hostel7.view.View;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.sql.Time;
 import java.time.LocalDateTime;
-import java.time.LocalTime;
+import java.util.HashSet;
 import java.util.UUID;
 
 @RestController
@@ -37,20 +34,34 @@ public class SettlingController {
 
 
     @JsonView(View.HostelResident.class)
-    @PostMapping("residentRegistration")
-    public void residentRegistration( @RequestParam String groupNumber,
-                                     @RequestParam String name, @RequestParam String surname,
-                                     @RequestParam String patronymic, @RequestParam String password)
+    @PostMapping("residentSettlingInDorms")
+    public SettlingInDorms residentSettlingInDorms(@RequestParam String groupNumber,
+                                                   @RequestParam String name, @RequestParam String surname,
+                                                   @RequestParam String patronymic, @RequestParam String password)
     {
         SettlingInDorms settlingInDorms = new SettlingInDorms(null, name, surname,
                 patronymic, Role.SettlingInDorms,
                 Status.In_line, groupNumber, password);
-        settlingInDormsRepository.save(settlingInDorms);
+        settlingInDorms = settlingInDormsRepository.save(settlingInDorms);
 
-        CheckInQueue checkInQueue = new CheckInQueue();
-        checkInQueue.setSettlingInDorms(settlingInDorms);
-        checkInQueue.setStatus(false);
-        checkInQueue.setTime(Time.valueOf(String.valueOf(LocalDateTime.now())));
+        CheckInQueue checkInQueue = new CheckInQueue(null,settlingInDorms.getIdSettlingInDorms(),
+                Time.valueOf(String.valueOf(LocalDateTime.now())),false);
         checkInQueueRepository.save(checkInQueue);
+
+        return settlingInDorms;
+    }
+
+    @JsonView(View.CheckInQueue.class)
+    @GetMapping("getQueueSettlingInDorms")
+    public HashSet<CheckInQueue> getQueueSettlingInDorms()
+    {
+        return checkInQueueRepository.findByStatusFalse();
+    }
+
+    @JsonView(View.CheckInQueue.class)
+    @GetMapping("getSettlingInDorms")
+    public SettlingInDorms getSettlingInDorms(@RequestParam UUID idSettlingInDorms)
+    {
+        return settlingInDormsRepository.findByIdSettlingInDorms(idSettlingInDorms);
     }
 }
