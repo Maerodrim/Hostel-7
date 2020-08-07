@@ -1,6 +1,7 @@
 package com.ssau.Hostel7.model;
 
 import com.fasterxml.jackson.annotation.JsonView;
+import com.ssau.Hostel7.model.enumModel.Gender;
 import com.ssau.Hostel7.view.View;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -26,6 +27,9 @@ public class Room {
     @Column(name = "Number room", unique = true, nullable = true)
     @JsonView(View.Room.class)
     private Integer numberRoom;
+    @Column(name = "gender", unique = true, nullable = true)
+    @JsonView(View.Room.class)
+    private Gender gender;
     @Column(name = "Room size", unique = false, nullable = true)
     @JsonView(View.Room.class)
     private Integer roomSize;

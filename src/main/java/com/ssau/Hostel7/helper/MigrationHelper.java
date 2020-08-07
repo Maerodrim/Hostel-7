@@ -4,6 +4,7 @@ import com.google.inject.Singleton;
 import com.ssau.Hostel7.model.Hostel;
 import com.ssau.Hostel7.model.Room;
 import com.ssau.Hostel7.model.RoomMigration;
+import com.ssau.Hostel7.model.enumModel.ConfirmationStatus;
 import com.ssau.Hostel7.repository.*;
 import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,9 +34,17 @@ public class MigrationHelper{
     {
         Hostel hostel = hostelRepository.findByNumber(numberHostel);
         Room room = roomRepository.findByIdHostelAndAndNumberRoom(hostel.getIdHostel(),numberRoom);
-
-        RoomMigration roomMigration = new RoomMigration(null, Time.valueOf(String.valueOf(LocalDateTime.now())),
-                null,idHostelResident,room.getIdRoom());
+        RoomMigration roomMigration;
+        if(roomMigrationRepository.findByIdHostelResident(idHostelResident).isEmpty())
+        {
+            roomMigration = new RoomMigration(null, Time.valueOf(String.valueOf(LocalDateTime.now())),
+                    null,idHostelResident,room.getIdRoom(), ConfirmationStatus.approval);
+        }
+        else
+        {
+            roomMigration = new RoomMigration(null, Time.valueOf(String.valueOf(LocalDateTime.now())),
+                    null,idHostelResident,room.getIdRoom(), ConfirmationStatus.inQueue);
+        }
         roomMigrationRepository.save(roomMigration);
     }
 

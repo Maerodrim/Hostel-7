@@ -1,6 +1,7 @@
 package com.ssau.Hostel7.model;
 
 import com.fasterxml.jackson.annotation.JsonView;
+import com.ssau.Hostel7.model.enumModel.ConfirmationStatus;
 import com.ssau.Hostel7.view.View;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -33,6 +34,9 @@ public class DormitoryPayment {
     @Column(name = "Day", unique = false, nullable = true)
     @JsonView(View.Hostel.class)
     private Time day;
+    @Column(name = "Сonfirmation", unique = false, nullable = true)
+    @JsonView(View.CheckInQueue.class)
+    private ConfirmationStatus status;
 
     @PrePersist
     public void generateId() {
