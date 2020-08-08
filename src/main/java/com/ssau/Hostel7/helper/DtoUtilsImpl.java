@@ -1,6 +1,7 @@
-package com.ssau.Hostel7.service.utils;
+package com.ssau.Hostel7.helper;
 
 import com.ssau.Hostel7.dto.response.CheckInQueueResponseDto;
+import com.ssau.Hostel7.dto.security.CustomUserDetails;
 import com.ssau.Hostel7.model.CheckInQueue;
 import com.ssau.Hostel7.model.Profile;
 import com.ssau.Hostel7.model.SettlingInDorms;
@@ -81,6 +82,17 @@ public class DtoUtilsImpl implements DtoUtils {
                 .settler(settlerDto)
                 .isSettled(entity.getIsSettled())
                 .time(entity.getTime())
+                .build();
+        return result;
+    }
+
+    @Override
+    public CustomUserDetails getCustomUserDetails(Profile profile) {
+        CustomUserDetails result = CustomUserDetails.builder()
+                .id(profile.getId())
+                .login(profile.getLogin())
+                .passwordHash(profile.getPassword())
+                .role(profile.getRole().name())
                 .build();
         return result;
     }

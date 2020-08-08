@@ -13,7 +13,7 @@ import com.ssau.Hostel7.model.enumModel.Status;
 import com.ssau.Hostel7.repository.CheckInQueueRepository;
 import com.ssau.Hostel7.repository.ProfileRepository;
 import com.ssau.Hostel7.repository.SettlingInDormsRepository;
-import com.ssau.Hostel7.service.utils.DtoUtils;
+import com.ssau.Hostel7.helper.DtoUtils;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
