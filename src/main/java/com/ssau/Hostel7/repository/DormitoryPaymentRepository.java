@@ -5,8 +5,9 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.Table;
+import java.util.UUID;
 
 @Repository
 @Table(name = "DormitoryPaymentRepository")
-public interface DormitoryPaymentRepository extends CrudRepository<DormitoryPayment, Long> {
+public interface DormitoryPaymentRepository extends CrudRepository<DormitoryPayment, UUID> {
 }

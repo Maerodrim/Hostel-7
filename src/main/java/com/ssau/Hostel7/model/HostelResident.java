@@ -1,17 +1,22 @@
 package com.ssau.Hostel7.model;
 
-import com.fasterxml.jackson.annotation.JsonView;
-import com.ssau.Hostel7.model.enumModel.Gender;
-import com.ssau.Hostel7.model.enumModel.Role;
-import com.ssau.Hostel7.view.View;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
+import javax.persistence.PrePersist;
+import javax.persistence.Table;
 import java.util.UUID;
 
+/**
+ * Сущность заселённого.
+ */
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
@@ -20,42 +25,45 @@ import java.util.UUID;
 @Table(name = "HostelResident")
 public class HostelResident {
 
+    /**
+     * Идентификатор заселённого.
+     */
     @Id
-    @JsonView(View.HostelResident.class)
-    private UUID idHostelResident;
-    @Column(name = "name", unique = false, nullable = true)
-    @JsonView(View.HostelResident.class)
-    private String name;
-    @Column(name = "surname", unique = false, nullable = true)
-    @JsonView(View.HostelResident.class)
-    private String surname;
-    @Column(name = "patronymic", unique = false, nullable = true)
-    @JsonView(View.HostelResident.class)
-    private String patronymic;
-    @Column(name = "login", unique = true, nullable = true)
-    @JsonView(View.HostelResident.class)
-    private String login;
-    @Column(name = "gender", unique = true, nullable = true)
-    @JsonView(View.HostelResident.class)
-    private Gender gender;
-    @Column(name = "role", unique = false, nullable = true)
-    @JsonView(View.HostelResident.class)
-    private Role role;
-    @Column(name = "Student ID Number", unique = false, nullable = true)
-    @JsonView(View.HostelResident.class)
+    private UUID id;
+
+    /**
+     * Номер студенческого билета.
+     */
+    @Column(name = "Student ID Number", unique = true, nullable = true)
     private String studentIDNumber;
-    @Column(name = "Contract number", unique = false, nullable = true)
-    @JsonView(View.HostelResident.class)
-    private String сontractNumber;
+
+    /**
+     * Номер договора.
+     */
+    @Column(name = "contract_id_number", unique = true)
+    private String contractIdNumber;
+
+    /**
+     * Номер группы.
+     */
     @Column(name = "Group number", unique = false, nullable = true)
-    @JsonView(View.HostelResident.class)
     private String groupNumber;
-    @Column(name = "Password", unique = false, nullable = true)
-    @JsonView(View.Protected.class)
-    private String password;
+
+    /**
+     * Номер пропуска.
+     */
+    @Column(name = "pass_number")
+    private String passNumber;
+
+    /**
+     * Профиль заселённого.
+     */
+    @OneToOne
+    @JoinColumn(name = "profile_id")
+    private Profile profile;
 
     @PrePersist
     public void generateId() {
-        this.idHostelResident = UUID.randomUUID();
+        this.id = UUID.randomUUID();
     }
 }

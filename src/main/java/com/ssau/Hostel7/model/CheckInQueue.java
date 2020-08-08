@@ -6,9 +6,14 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.hibernate.annotations.LazyToOne;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
+import javax.persistence.PrePersist;
+import javax.persistence.Table;
 import java.sql.Time;
 import java.util.UUID;
 
@@ -20,20 +25,25 @@ import java.util.UUID;
 @Table(name = "CheckInQueue")
 public class CheckInQueue {
     @Id
-    @JsonView(View.HostelResident.class)
-    private UUID idCheckInQueue;
-    @Column(name = "Settling In Dorms", unique = false, nullable = true)
-    @JsonView(View.CheckInQueue.class)
-    private UUID settlingInDorms;
+    private UUID id;
+
+    @JoinColumn(name = "Settling In Dorms", unique = false, nullable = true)
+    @OneToOne
+    private SettlingInDorms settler;
+
     @Column(name = "Time", unique = false, nullable = true)
     @JsonView(View.CheckInQueue.class)
     private Time time;
+
+    /**
+     * true - заселён.
+     */
     @Column(name = "Check-in status", unique = false, nullable = true)
     @JsonView(View.CheckInQueue.class)
-    private Boolean status;
+    private Boolean isSettled;
 
     @PrePersist
     public void generateId() {
-        this.idCheckInQueue = UUID.randomUUID();
+        this.id = UUID.randomUUID();
     }
 }

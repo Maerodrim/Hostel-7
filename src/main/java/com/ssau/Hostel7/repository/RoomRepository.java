@@ -9,6 +9,6 @@ import java.util.UUID;
 
 @Repository
 @Table(name = "Room")
-public interface RoomRepository extends CrudRepository<Room, Long> {
+public interface RoomRepository extends CrudRepository<Room, UUID> {
     Room findByIdHostelAndAndNumberRoom(UUID id,Integer number);
 }

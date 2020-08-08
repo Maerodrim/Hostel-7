@@ -1,71 +1,51 @@
 package com.ssau.Hostel7.controller;
 
 import com.fasterxml.jackson.annotation.JsonView;
-import com.ssau.Hostel7.model.CheckInQueue;
-import com.ssau.Hostel7.model.SettlingInDorms;
-import com.ssau.Hostel7.model.enumModel.Gender;
-import com.ssau.Hostel7.model.enumModel.Role;
-import com.ssau.Hostel7.model.enumModel.Status;
-import com.ssau.Hostel7.repository.CheckInQueueRepository;
-import com.ssau.Hostel7.repository.SettlingInDormsRepository;
+import com.ssau.Hostel7.dto.request.SettlerRequestDto;
+import com.ssau.Hostel7.dto.response.CheckInQueueResponseDto;
+import com.ssau.Hostel7.dto.response.SettlingResponseDto;
+import com.ssau.Hostel7.service.SettlingService;
 import com.ssau.Hostel7.view.View;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import lombok.RequiredArgsConstructor;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-import java.sql.Time;
-import java.time.LocalDateTime;
-import java.util.HashSet;
+import javax.validation.Valid;
+import java.util.Set;
 import java.util.UUID;
 
 @RestController
 @RequestMapping("SettlingController")
+@RequiredArgsConstructor
 public class SettlingController {
 
-    private SettlingInDormsRepository settlingInDormsRepository;
-    private CheckInQueueRepository checkInQueueRepository;
-
-    Logger log = LoggerFactory.getLogger(SettlingController.class);
-
-    @Autowired
-    private SettlingController(SettlingInDormsRepository settlingInDormsRepository,
-                               CheckInQueueRepository checkInQueueRepository) {
-        this.settlingInDormsRepository = settlingInDormsRepository;
-        this.checkInQueueRepository = checkInQueueRepository;
-    }
-
+    private final SettlingService settlingService;
 
     @JsonView(View.HostelResident.class)
     @PostMapping("registrationSettlingInDorms")
-    public SettlingInDorms registrationSettlingInDorms(@RequestParam String groupNumber,
-                                                   @RequestParam String name, @RequestParam String surname,
-                                                   @RequestParam String patronymic, @RequestParam String password,
-                                                   @RequestParam String login, @RequestParam Gender gender) {
-        SettlingInDorms settlingInDorms = new SettlingInDorms(null, name, surname,
-                patronymic, login, gender, Role.SettlingInDorms,
-                Status.In_line, groupNumber, password);
+    public SettlingResponseDto registrationSettlingInDorms(
+            @RequestBody @Valid SettlerRequestDto settlerRequestDto
+    ) {
+        SettlingResponseDto result = settlingService.saveSettler(settlerRequestDto);
 
-        log.trace("Registration settling in dorms {}",settlingInDorms);
-
-        settlingInDorms = settlingInDormsRepository.save(settlingInDorms);
-
-        CheckInQueue checkInQueue = new CheckInQueue(null, settlingInDorms.getIdSettlingInDorms(),
-                Time.valueOf(String.valueOf(LocalDateTime.now())), false);
-        checkInQueueRepository.save(checkInQueue);
-
-        return settlingInDorms;
+        return result;
     }
 
     @JsonView(View.CheckInQueue.class)
     @GetMapping("getQueueSettlingInDorms")
-    public HashSet<CheckInQueue> getQueueSettlingInDorms() {
-        return checkInQueueRepository.findByStatusFalse();
+    public Set<CheckInQueueResponseDto> getQueueSettlingInDorms() {
+        //TODO Pagination
+        Set<CheckInQueueResponseDto> result = settlingService.getSettlersQueue();
+        return result;
     }
 
     @JsonView(View.CheckInQueue.class)
-    @GetMapping("getSettlingInDorms")
-    public SettlingInDorms getSettlingInDorms(@RequestParam UUID idSettlingInDorms) {
-        return settlingInDormsRepository.findByIdSettlingInDorms(idSettlingInDorms);
+    @GetMapping("getSettlingInDorms/{id}")
+    public SettlingResponseDto getSettlingInDorms(@PathVariable("id") UUID id) {
+        return settlingService.getSettlerById(id);
     }
 }

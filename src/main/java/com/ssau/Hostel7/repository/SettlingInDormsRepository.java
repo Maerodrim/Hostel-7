@@ -10,6 +10,6 @@ import java.util.UUID;
 
 @Repository
 @Table(name = "SettlingInDorms")
-public interface SettlingInDormsRepository extends CrudRepository<SettlingInDorms, Long> {
+public interface SettlingInDormsRepository extends CrudRepository<SettlingInDorms, UUID> {
     SettlingInDorms findByIdSettlingInDorms(UUID idSettlingInDorms);
 }

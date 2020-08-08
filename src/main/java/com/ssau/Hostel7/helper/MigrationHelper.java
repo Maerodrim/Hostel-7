@@ -30,21 +30,19 @@ public class MigrationHelper{
         this.roomRepository = roomRepository;
     }
 
-    public void startMigration(UUID idHostelResident, Integer numberRoom, Integer numberHostel)
-    {
+    /**
+     * Заселение или переселение в комнату.
+     * @param idHostelResident Идентификатор жильца.
+     * @param numberRoom Номер комнаты.
+     * @param numberHostel Номер общежития.
+     */
+    public void startMigration(UUID idHostelResident, Integer numberRoom, Integer numberHostel) {
         Hostel hostel = hostelRepository.findByNumber(numberHostel);
         Room room = roomRepository.findByIdHostelAndAndNumberRoom(hostel.getIdHostel(),numberRoom);
         RoomMigration roomMigration;
-        if(roomMigrationRepository.findByIdHostelResident(idHostelResident).isEmpty())
-        {
-            roomMigration = new RoomMigration(null, Time.valueOf(String.valueOf(LocalDateTime.now())),
-                    null,idHostelResident,room.getIdRoom(), ConfirmationStatus.approval);
-        }
-        else
-        {
-            roomMigration = new RoomMigration(null, Time.valueOf(String.valueOf(LocalDateTime.now())),
-                    null,idHostelResident,room.getIdRoom(), ConfirmationStatus.inQueue);
-        }
+        roomMigration = new RoomMigration(null, Time.valueOf(String.valueOf(LocalDateTime.now())),
+                null, idHostelResident, room.getIdRoom(), ConfirmationStatus.inQueue);
+
         roomMigrationRepository.save(roomMigration);
     }
 
