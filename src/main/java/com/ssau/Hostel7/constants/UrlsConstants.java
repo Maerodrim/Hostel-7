@@ -1,6 +1,6 @@
 package com.ssau.Hostel7.constants;
 
-public interface Urls {
+public interface UrlsConstants {
 
     String LOGIN_URL = "/login";
 

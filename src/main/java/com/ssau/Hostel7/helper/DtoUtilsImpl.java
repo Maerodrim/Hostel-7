@@ -1,19 +1,26 @@
 package com.ssau.Hostel7.helper;
 
 import com.ssau.Hostel7.dto.response.CheckInQueueResponseDto;
+import com.ssau.Hostel7.dto.response.HostelResidentResponseDto;
 import com.ssau.Hostel7.dto.security.CustomUserDetails;
+import com.ssau.Hostel7.helper.mapper.HostelResidentMapper;
 import com.ssau.Hostel7.model.CheckInQueue;
+import com.ssau.Hostel7.model.HostelResident;
 import com.ssau.Hostel7.model.Profile;
 import com.ssau.Hostel7.model.SettlingInDorms;
 import com.ssau.Hostel7.model.enumModel.Role;
 import com.ssau.Hostel7.model.enumModel.Status;
 import com.ssau.Hostel7.dto.request.SettlerRequestDto;
 import com.ssau.Hostel7.dto.response.SettlingResponseDto;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 @Component
+@RequiredArgsConstructor
 public class DtoUtilsImpl implements DtoUtils {
+
+    private final HostelResidentMapper hostelResidentMapper;
 
     @Override
     public Profile getProfile(SettlerRequestDto dto, Role role) {
@@ -87,6 +94,7 @@ public class DtoUtilsImpl implements DtoUtils {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public CustomUserDetails getCustomUserDetails(Profile profile) {
         CustomUserDetails result = CustomUserDetails.builder()
                 .id(profile.getId())
@@ -95,5 +103,11 @@ public class DtoUtilsImpl implements DtoUtils {
                 .role(profile.getRole().name())
                 .build();
         return result;
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public HostelResidentResponseDto getHostelResidentResponseDto(HostelResident hostelResident) {
+        return hostelResidentMapper.getResponseDto(hostelResident);
     }
 }

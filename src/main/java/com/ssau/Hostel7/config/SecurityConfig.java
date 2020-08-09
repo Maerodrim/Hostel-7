@@ -1,6 +1,6 @@
 package com.ssau.Hostel7.config;
 
-import com.ssau.Hostel7.constants.Urls;
+import com.ssau.Hostel7.constants.UrlsConstants;
 import com.ssau.Hostel7.helper.holders.JwtConstantsHolder;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,11 +39,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .formLogin()
                     .permitAll()
-                    .loginPage(Urls.LOGIN_URL)
+                    .loginPage(UrlsConstants.LOGIN_URL)
                     .successHandler(jwtAuthenticationSuccessHandler)
                 .and()
                 .logout()
-                    .logoutUrl(Urls.LOGOUT_URL)
+                    .logoutUrl(UrlsConstants.LOGOUT_URL)
                     .deleteCookies(jwtConstants.getCookieName())
                 .and()
                 .addFilterBefore(

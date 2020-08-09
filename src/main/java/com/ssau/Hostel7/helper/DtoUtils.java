@@ -2,9 +2,11 @@ package com.ssau.Hostel7.helper;
 
 import com.ssau.Hostel7.dto.request.SettlerRequestDto;
 import com.ssau.Hostel7.dto.response.CheckInQueueResponseDto;
+import com.ssau.Hostel7.dto.response.HostelResidentResponseDto;
 import com.ssau.Hostel7.dto.response.SettlingResponseDto;
 import com.ssau.Hostel7.dto.security.CustomUserDetails;
 import com.ssau.Hostel7.model.CheckInQueue;
+import com.ssau.Hostel7.model.HostelResident;
 import com.ssau.Hostel7.model.Profile;
 import com.ssau.Hostel7.model.SettlingInDorms;
 import com.ssau.Hostel7.model.enumModel.Role;
@@ -24,5 +26,7 @@ public interface DtoUtils {
     CheckInQueueResponseDto getCheckInQueueResponseDto(CheckInQueue entity);
 
     CustomUserDetails getCustomUserDetails(Profile profile);
+
+    HostelResidentResponseDto getHostelResidentResponseDto(HostelResident hostelResident);
 
 }

@@ -12,6 +12,9 @@ import javax.persistence.*;
 import java.sql.Time;
 import java.util.UUID;
 
+/**
+ * Сущность факта оплаты за общежитие.
+ */
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
@@ -21,7 +24,7 @@ import java.util.UUID;
 public class DormitoryPayment {
     @Id
     @JsonView(View.Hostel.class)
-    private UUID idDormitoryPayment;
+    private UUID id;
     @Column(name = "idHostelResident", unique = false, nullable = true)
     @JsonView(View.Room.class)
     private Integer idHostel;
@@ -40,6 +43,6 @@ public class DormitoryPayment {
 
     @PrePersist
     public void generateId() {
-        this.idDormitoryPayment = UUID.randomUUID();
+        this.id = UUID.randomUUID();
     }
 }
