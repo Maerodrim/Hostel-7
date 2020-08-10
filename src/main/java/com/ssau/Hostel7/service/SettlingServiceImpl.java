@@ -66,7 +66,7 @@ public class SettlingServiceImpl implements SettlingService {
     @Transactional(readOnly = true)
     public Set<CheckInQueueResponseDto> getSettlersQueue() {
         //TODO Пагинация!
-        HashSet<CheckInQueue> queued = checkInQueueRepository.findByStatusFalseOrderByTime();
+        HashSet<CheckInQueue> queued = checkInQueueRepository.findByIsSettledIsFalse();
 
         return queued.stream()
                 .map(dtoUtils::getCheckInQueueResponseDto)

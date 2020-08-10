@@ -13,5 +13,5 @@ import java.util.UUID;
 @Table(name = "CheckInQueueRepository")
 public interface CheckInQueueRepository extends CrudRepository<CheckInQueue, UUID> {
     CheckInQueue findBySettler(SettlingInDorms settlingInDorms);
-    HashSet<CheckInQueue> findByStatusFalseOrderByTime();
+    HashSet<CheckInQueue> findByIsSettledIsFalse();
 }

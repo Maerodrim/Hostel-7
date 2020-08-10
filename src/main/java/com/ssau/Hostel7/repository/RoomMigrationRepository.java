@@ -11,7 +11,7 @@ import java.util.UUID;
 @Repository
 @Table(name = "RoomMigration")
 public interface RoomMigrationRepository extends CrudRepository<RoomMigration, UUID> {
-    RoomMigration findByIdHostelResidentAndIdRoomAAndEndDayNull(UUID id, UUID idRoom);
+    RoomMigration findByIdHostelResidentAndIdRoomAndEndDayIsNull(UUID id, UUID idRoom);
     HashSet<RoomMigration> findByIdHostelResident(UUID id);
     HashSet<RoomMigration> findByEndDayIsNull();
 }

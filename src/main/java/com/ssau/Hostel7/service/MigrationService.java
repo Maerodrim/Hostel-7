@@ -9,12 +9,13 @@ import com.ssau.Hostel7.model.enumModel.ConfirmationStatus;
 import com.ssau.Hostel7.repository.RoomMigrationRepository;
 import com.ssau.Hostel7.repository.RoomRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Component;
 
 import java.sql.Time;
 import java.time.LocalDateTime;
 import java.util.Optional;
 import java.util.UUID;
-
+@Component
 @Singleton
 @RequiredArgsConstructor
 public class MigrationService {
@@ -48,7 +49,7 @@ public class MigrationService {
                 errorMessages.getEntityNotFound()
         ));
 
-        RoomMigration roomMigration = roomMigrationRepository.findByIdHostelResidentAndIdRoomAAndEndDayNull(idHostelResident,room.getIdRoom());
+        RoomMigration roomMigration = roomMigrationRepository.findByIdHostelResidentAndIdRoomAndEndDayIsNull(idHostelResident,room.getIdRoom());
         roomMigration.setEndDay(Time.valueOf(String.valueOf(LocalDateTime.now())));
         roomMigrationRepository.save(roomMigration);
     }
