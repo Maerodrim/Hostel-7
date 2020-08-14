@@ -27,7 +27,7 @@ public class Hostel {
     @OneToMany
     @Column(name = "personal", unique = false, nullable = true)
     @JsonView(View.Personal.class)
-    private Set<Personal> user;
+    private Set<Profile> user;
     @OneToMany
     @Column(name = "room", unique = false, nullable = true)
     @JsonView(View.Room.class)

@@ -13,20 +13,23 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import com.ssau.Hostel7.constants.*;
 
 import javax.validation.Valid;
 import java.util.Set;
 import java.util.UUID;
 
+import static com.ssau.Hostel7.constants.UrlsConstants.*;
+
 @RestController
-@RequestMapping("SettlingController")
+@RequestMapping(SETTLING)
 @RequiredArgsConstructor
 public class SettlingController {
 
     private final SettlingService settlingService;
 
     @JsonView(View.HostelResident.class)
-    @PostMapping("registrationSettlingInDorms")
+    @PostMapping(REGISTRATION)
     public SettlingResponseDto registrationSettlingInDorms(
             @RequestBody @Valid SettlerRequestDto settlerRequestDto
     ) {
@@ -36,7 +39,7 @@ public class SettlingController {
     }
 
     @JsonView(View.CheckInQueue.class)
-    @GetMapping("getQueueSettlingInDorms")
+    @GetMapping(GET + QUEUE)
     public Set<CheckInQueueResponseDto> getQueueSettlingInDorms() {
         //TODO Pagination
         Set<CheckInQueueResponseDto> result = settlingService.getSettlersQueue();
@@ -44,7 +47,7 @@ public class SettlingController {
     }
 
     @JsonView(View.CheckInQueue.class)
-    @GetMapping("getSettlingInDorms/{id}")
+    @GetMapping(GET + ID_PATH)
     public SettlingResponseDto getSettlingInDorms(@PathVariable("id") UUID id) {
         return settlingService.getSettlerById(id);
     }

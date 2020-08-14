@@ -16,9 +16,11 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.validation.Valid;
 import javax.validation.constraints.Pattern;
 
+import static com.ssau.Hostel7.constants.UrlsConstants.*;
+
 
 @RestController
-@RequestMapping("ResidentController")
+@RequestMapping(RESIDENT)
 @RequiredArgsConstructor
 public class ResidentController {
 
@@ -26,7 +28,7 @@ public class ResidentController {
 
 
     @JsonView(View.HostelResident.class)
-    @PostMapping("residentRegistration/{room_id}")
+    @PostMapping(REGISTRATION + ROOM_ID_PATH)
     public HostelResidentResponseDto residentRegistration(
             @RequestBody @Valid HostelResidentRequestDto dto,
             @PathVariable("room_id") @Pattern(regexp = PatternsConstants.UUID_PATTERN) String roomId

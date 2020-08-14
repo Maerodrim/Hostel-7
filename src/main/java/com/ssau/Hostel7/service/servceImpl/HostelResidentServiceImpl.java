@@ -1,4 +1,4 @@
-package com.ssau.Hostel7.service;
+package com.ssau.Hostel7.service.servceImpl;
 
 import com.ssau.Hostel7.dto.request.HostelResidentRequestDto;
 import com.ssau.Hostel7.dto.response.HostelResidentResponseDto;
@@ -13,6 +13,8 @@ import com.ssau.Hostel7.model.enumModel.Status;
 import com.ssau.Hostel7.repository.CheckInQueueRepository;
 import com.ssau.Hostel7.repository.HostelResidentRepository;
 import com.ssau.Hostel7.repository.SettlingInDormsRepository;
+import com.ssau.Hostel7.service.HostelResidentService;
+import com.ssau.Hostel7.service.MigrationService;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

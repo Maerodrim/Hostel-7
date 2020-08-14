@@ -1,5 +1,6 @@
 package com.ssau.Hostel7.helper;
 
+import com.ssau.Hostel7.dto.request.ProfileRequestDto;
 import com.ssau.Hostel7.dto.response.CheckInQueueResponseDto;
 import com.ssau.Hostel7.dto.response.HostelResidentResponseDto;
 import com.ssau.Hostel7.dto.security.CustomUserDetails;
@@ -33,6 +34,22 @@ public class DtoUtilsImpl implements DtoUtils {
                 dto.getPreferredRoomType(),
                 dto.getPassword(),
                 role
+        );
+
+        return profile;
+    }
+
+    @Override
+    public Profile getProfile(ProfileRequestDto dto) {
+        Profile profile = new Profile(
+                null,
+                dto.getName(),
+                dto.getSurname(),
+                dto.getPatronymic(),
+                dto.getLogin(),
+                dto.getPreferredRoomType(),
+                dto.getPassword(),
+                dto.getRole()
         );
 
         return profile;

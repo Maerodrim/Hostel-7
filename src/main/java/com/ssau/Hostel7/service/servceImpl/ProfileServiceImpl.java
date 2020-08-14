@@ -1,10 +1,11 @@
-package com.ssau.Hostel7.service;
+package com.ssau.Hostel7.service.servceImpl;
 
 import com.ssau.Hostel7.dto.security.CustomUserDetails;
 import com.ssau.Hostel7.helper.holders.ErrorMessagesHolder;
 import com.ssau.Hostel7.model.Profile;
 import com.ssau.Hostel7.repository.ProfileRepository;
 import com.ssau.Hostel7.helper.DtoUtils;
+import com.ssau.Hostel7.service.ProfileService;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

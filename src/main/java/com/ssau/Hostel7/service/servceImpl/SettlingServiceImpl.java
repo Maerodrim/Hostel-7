@@ -1,4 +1,4 @@
-package com.ssau.Hostel7.service;
+package com.ssau.Hostel7.service.servceImpl;
 
 import com.ssau.Hostel7.dto.request.SettlerRequestDto;
 import com.ssau.Hostel7.dto.response.CheckInQueueResponseDto;
@@ -14,6 +14,7 @@ import com.ssau.Hostel7.repository.CheckInQueueRepository;
 import com.ssau.Hostel7.repository.ProfileRepository;
 import com.ssau.Hostel7.repository.SettlingInDormsRepository;
 import com.ssau.Hostel7.helper.DtoUtils;
+import com.ssau.Hostel7.service.SettlingService;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -66,7 +67,7 @@ public class SettlingServiceImpl implements SettlingService {
     @Transactional(readOnly = true)
     public Set<CheckInQueueResponseDto> getSettlersQueue() {
         //TODO Пагинация!
-        HashSet<CheckInQueue> queued = checkInQueueRepository.findByIsSettledIsFalse();
+        HashSet<CheckInQueue> queued = checkInQueueRepository.findByIsSettledIsFalseOrderByTime();
 
         return queued.stream()
                 .map(dtoUtils::getCheckInQueueResponseDto)
