@@ -1,7 +1,6 @@
 package com.ssau.Hostel7.controller;
 
 import com.fasterxml.jackson.annotation.JsonView;
-import com.ssau.Hostel7.dto.request.SettlerRequestDto;
 import com.ssau.Hostel7.dto.response.CheckInQueueResponseDto;
 import com.ssau.Hostel7.dto.response.SettlingResponseDto;
 import com.ssau.Hostel7.service.SettlingService;
@@ -10,12 +9,10 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import com.ssau.Hostel7.constants.*;
 
-import javax.validation.Valid;
+import java.security.Principal;
 import java.util.Set;
 import java.util.UUID;
 
@@ -28,14 +25,10 @@ public class SettlingController {
 
     private final SettlingService settlingService;
 
-    @JsonView(View.HostelResident.class)
-    @PostMapping(REGISTRATION)
-    public SettlingResponseDto registrationSettlingInDorms(
-            @RequestBody @Valid SettlerRequestDto settlerRequestDto
-    ) {
-        SettlingResponseDto result = settlingService.saveSettler(settlerRequestDto);
-
-        return result;
+    @PostMapping(SETTLING)
+    public SettlingResponseDto settled(Principal principal) {
+        String mail = principal.getName();
+        return settlingService.saveSettler(mail);
     }
 
     @JsonView(View.CheckInQueue.class)

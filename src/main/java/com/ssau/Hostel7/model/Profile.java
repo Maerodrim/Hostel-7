@@ -57,9 +57,9 @@ public class Profile {
     /**
      * Логин.
      */
-    @Column(name = "login", unique = true, nullable = true)
+    @Column(name = "mail", unique = true, nullable = true)
     @JsonView(View.HostelResident.class)
-    private String login;
+    private String mail;
 
     /**
      * Тип комнаты по половой принадлежности.

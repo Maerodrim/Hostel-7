@@ -1,9 +1,9 @@
 package com.ssau.Hostel7.service.servceImpl;
 
-import com.ssau.Hostel7.dto.request.SettlerRequestDto;
 import com.ssau.Hostel7.dto.response.CheckInQueueResponseDto;
 import com.ssau.Hostel7.dto.response.SettlingResponseDto;
 import com.ssau.Hostel7.exception.EntityNotFoundException;
+import com.ssau.Hostel7.helper.DtoUtils;
 import com.ssau.Hostel7.helper.holders.ErrorMessagesHolder;
 import com.ssau.Hostel7.model.CheckInQueue;
 import com.ssau.Hostel7.model.Profile;
@@ -13,7 +13,6 @@ import com.ssau.Hostel7.model.enumModel.Status;
 import com.ssau.Hostel7.repository.CheckInQueueRepository;
 import com.ssau.Hostel7.repository.ProfileRepository;
 import com.ssau.Hostel7.repository.SettlingInDormsRepository;
-import com.ssau.Hostel7.helper.DtoUtils;
 import com.ssau.Hostel7.service.SettlingService;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
@@ -47,17 +46,20 @@ public class SettlingServiceImpl implements SettlingService {
 
     @Override
     @Transactional
-    public SettlingResponseDto saveSettler(SettlerRequestDto dto) {
-        Profile profile = dtoUtils.getProfile(dto, Role.SettlingInDorms);
-        logger.trace("Registration settling in dorms {}", profile);
+    public SettlingResponseDto saveSettler(String mail) {
+        Optional<Profile> profileOpt = profileRepository.findByMail(mail);
+        Profile profile = profileOpt.orElseThrow(
+                () -> new EntityNotFoundException(errorMessagesHolder.getEntityNotFound())
+        );
 
-        Profile savedProfile = profileRepository.save(profile);
         SettlingInDorms settler = dtoUtils.getSettling(
                 Status.In_line,
-                savedProfile
+                profile
         );
 
         SettlingInDorms saved = settlingInDormsRepository.save(settler);
+        profile.setRole(Role.SettlingInDorms);
+        profileRepository.save(profile);
 
         setInQueue(saved);
         return dtoUtils.getSettlingResponseDto(saved);

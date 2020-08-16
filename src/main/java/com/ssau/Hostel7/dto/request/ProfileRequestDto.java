@@ -2,12 +2,14 @@ package com.ssau.Hostel7.dto.request;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.ssau.Hostel7.constants.PatternsConstants;
+import com.ssau.Hostel7.helper.validation.group.CreateProfileValidationGroup;
+import com.ssau.Hostel7.helper.validation.group.UpdateProfileValidationGroup;
 import com.ssau.Hostel7.model.enumModel.PreferredRoomType;
-import com.ssau.Hostel7.model.enumModel.Role;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Null;
 import javax.validation.constraints.Pattern;
 
 @AllArgsConstructor
@@ -15,6 +17,8 @@ import javax.validation.constraints.Pattern;
 public class ProfileRequestDto {
 
     @Pattern(regexp = PatternsConstants.UUID_PATTERN)
+    @NotNull(groups = UpdateProfileValidationGroup.class)
+    @Null(groups = CreateProfileValidationGroup.class)
     private String id;
 
     @JsonProperty("name")
@@ -32,13 +36,9 @@ public class ProfileRequestDto {
     @NotNull
     private String password;
 
-    @JsonProperty("login")
+    @JsonProperty("mail")
     @NotNull
-    private String login;
-
-    @JsonProperty( "role")
-    @NotNull
-    private Role role;
+    private String mail;
 
     @JsonProperty("preferred_room_type")
     @NotNull

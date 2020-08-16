@@ -10,6 +10,8 @@ import java.util.UUID;
 @Repository
 public interface ProfileRepository extends CrudRepository<Profile, UUID> {
 
-    Optional<Profile> findByLogin(String login);
+    Optional<Profile> findByMail(String mail);
+
+    boolean existsByMail(String mail);
 
 }

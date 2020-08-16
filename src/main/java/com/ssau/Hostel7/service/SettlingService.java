@@ -1,6 +1,5 @@
 package com.ssau.Hostel7.service;
 
-import com.ssau.Hostel7.dto.request.SettlerRequestDto;
 import com.ssau.Hostel7.dto.response.CheckInQueueResponseDto;
 import com.ssau.Hostel7.dto.response.SettlingResponseDto;
 
@@ -11,10 +10,10 @@ public interface SettlingService {
 
     /**
      * Register new settler.
-     * @param dto request dto for registration.
+     * @param mail mail of settler profile.
      * @return registered settler.
      */
-    SettlingResponseDto saveSettler(SettlerRequestDto dto);
+    SettlingResponseDto saveSettler(String mail);
 
     Set<CheckInQueueResponseDto> getSettlersQueue();
 
