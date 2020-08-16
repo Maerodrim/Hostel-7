@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonValue;
 import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
-public enum PreferredRoomType {
+public enum RoomType {
     MALE_ROOM("male"),
     FAMILY_ROOM("family"),
     FEMALE_ROOM("female");

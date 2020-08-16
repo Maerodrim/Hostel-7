@@ -28,7 +28,7 @@ public class ResidentController {
 
 
     @JsonView(View.HostelResident.class)
-    @PostMapping(REGISTRATION + ROOM_ID_PATH)
+    @PostMapping(RESIDENT + ROOM_ID_PATH)
     public HostelResidentResponseDto residentRegistration(
             @RequestBody @Valid HostelResidentRequestDto dto,
             @PathVariable("room_id") @Pattern(regexp = PatternsConstants.UUID_PATTERN) String roomId

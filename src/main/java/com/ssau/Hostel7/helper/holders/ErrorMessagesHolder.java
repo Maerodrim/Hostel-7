@@ -11,4 +11,7 @@ public class ErrorMessagesHolder {
     @Value("${entity.not_found}")
     private String entityNotFound;
 
+    @Value("${room.type.mismatch}")
+    private String roomTypeMismatch;
+
 }

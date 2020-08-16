@@ -2,7 +2,7 @@ package com.ssau.Hostel7.dto.request;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.ssau.Hostel7.constants.PatternsConstants;
-import com.ssau.Hostel7.model.enumModel.PreferredRoomType;
+import com.ssau.Hostel7.model.enumModel.RoomType;
 import lombok.Data;
 
 import javax.validation.constraints.NotNull;
@@ -44,6 +44,6 @@ public class SettlerRequestDto {
 
     @JsonProperty("preferred_room_type")
     @NotNull
-    private PreferredRoomType preferredRoomType;
+    private RoomType preferredRoomType;
 
 }

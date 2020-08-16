@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.ssau.Hostel7.constants.PatternsConstants;
 import com.ssau.Hostel7.helper.validation.group.CreateProfileValidationGroup;
 import com.ssau.Hostel7.helper.validation.group.UpdateProfileValidationGroup;
-import com.ssau.Hostel7.model.enumModel.PreferredRoomType;
+import com.ssau.Hostel7.model.enumModel.RoomType;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
@@ -42,5 +42,5 @@ public class ProfileRequestDto {
 
     @JsonProperty("preferred_room_type")
     @NotNull
-    private PreferredRoomType preferredRoomType;
+    private RoomType preferredRoomType;
 }

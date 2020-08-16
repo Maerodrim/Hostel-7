@@ -1,7 +1,7 @@
 package com.ssau.Hostel7.dto.response;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.ssau.Hostel7.model.enumModel.PreferredRoomType;
+import com.ssau.Hostel7.model.enumModel.RoomType;
 import com.ssau.Hostel7.model.enumModel.Role;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -30,5 +30,5 @@ public class ProfileResponseDto {
     private Role role;
 
     @JsonProperty("preferred_room_type")
-    private PreferredRoomType preferredRoomType;
+    private RoomType preferredRoomType;
 }

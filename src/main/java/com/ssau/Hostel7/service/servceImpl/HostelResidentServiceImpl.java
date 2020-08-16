@@ -3,15 +3,18 @@ package com.ssau.Hostel7.service.servceImpl;
 import com.ssau.Hostel7.dto.request.HostelResidentRequestDto;
 import com.ssau.Hostel7.dto.response.HostelResidentResponseDto;
 import com.ssau.Hostel7.exception.EntityNotFoundException;
+import com.ssau.Hostel7.exception.RoomTypeMismatchException;
 import com.ssau.Hostel7.helper.DtoUtils;
 import com.ssau.Hostel7.helper.holders.ErrorMessagesHolder;
 import com.ssau.Hostel7.model.CheckInQueue;
 import com.ssau.Hostel7.model.HostelResident;
 import com.ssau.Hostel7.model.Profile;
+import com.ssau.Hostel7.model.Room;
 import com.ssau.Hostel7.model.SettlingInDorms;
 import com.ssau.Hostel7.model.enumModel.Status;
 import com.ssau.Hostel7.repository.CheckInQueueRepository;
 import com.ssau.Hostel7.repository.HostelResidentRepository;
+import com.ssau.Hostel7.repository.RoomRepository;
 import com.ssau.Hostel7.repository.SettlingInDormsRepository;
 import com.ssau.Hostel7.service.HostelResidentService;
 import com.ssau.Hostel7.service.MigrationService;
@@ -33,6 +36,8 @@ public class HostelResidentServiceImpl implements HostelResidentService {
 
     private final SettlingInDormsRepository settlingInDormsRepository;
 
+    private final RoomRepository roomRepository;
+
     private final MigrationService migrationService;
 
     private final DtoUtils dtoUtils;
@@ -49,6 +54,15 @@ public class HostelResidentServiceImpl implements HostelResidentService {
                 new EntityNotFoundException(errorMessages.getEntityNotFound())
         );
         Profile profile = settler.getProfile();
+
+        UUID roomIdUUID = UUID.fromString(roomId);
+        Optional<Room> roomOptional = roomRepository.findById(roomIdUUID);
+        Room room = roomOptional.orElseThrow(() ->
+                new EntityNotFoundException(errorMessages.getEntityNotFound())
+        );
+        if (room.getRoomType() != profile.getPreferredRoomType()) {
+            throw new RoomTypeMismatchException(errorMessages.getRoomTypeMismatch());
+        }
 
         HostelResident hostelResident = new HostelResident(
                 null,
@@ -67,8 +81,7 @@ public class HostelResidentServiceImpl implements HostelResidentService {
         checkInQueue.setIsSettled(true);
         checkInQueueRepository.save(checkInQueue);
 
-        UUID roomIdUUID = UUID.fromString(roomId);
-        migrationService.startMigration(saved.getId(), roomIdUUID);
+        migrationService.startMigration(saved, room);
 
         settler.setStatus(Status.Occupied);
         settlingInDormsRepository.save(settler);

@@ -12,4 +12,6 @@ public interface UrlsConstants {
     String ROOM_ID_PATH = "/{room_id}";
     String ADMIN = "admin";
     String HOSTEL = "hostel";
+    String ROOM_URL = "/room";
+    String ROOM_RANDOM_URL = ROOM_URL + "/random";
 }

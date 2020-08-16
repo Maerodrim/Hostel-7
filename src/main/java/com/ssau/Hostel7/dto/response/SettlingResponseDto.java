@@ -2,7 +2,7 @@ package com.ssau.Hostel7.dto.response;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonView;
-import com.ssau.Hostel7.model.enumModel.PreferredRoomType;
+import com.ssau.Hostel7.model.enumModel.RoomType;
 import com.ssau.Hostel7.model.enumModel.Role;
 import com.ssau.Hostel7.model.enumModel.Status;
 import com.ssau.Hostel7.view.View;
@@ -31,7 +31,7 @@ public class SettlingResponseDto {
     private String login;
     
     @JsonView(View.HostelResident.class)
-    private PreferredRoomType preferredRoomType;
+    private RoomType preferredRoomType;
     
     @JsonView(View.CheckInQueue.class)
     private Role role;

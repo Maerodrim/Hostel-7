@@ -1,7 +1,7 @@
 package com.ssau.Hostel7.model;
 
 import com.fasterxml.jackson.annotation.JsonView;
-import com.ssau.Hostel7.model.enumModel.PreferredRoomType;
+import com.ssau.Hostel7.model.enumModel.RoomType;
 import com.ssau.Hostel7.model.enumModel.Role;
 import com.ssau.Hostel7.view.View;
 import lombok.AllArgsConstructor;
@@ -66,7 +66,7 @@ public class Profile {
      */
     @Column(name = "gender", unique = true, nullable = true)
     @JsonView(View.HostelResident.class)
-    private PreferredRoomType preferredRoomType;
+    private RoomType preferredRoomType;
 
     /**
      * Поролб.
