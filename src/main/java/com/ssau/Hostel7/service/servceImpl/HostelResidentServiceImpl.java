@@ -3,7 +3,6 @@ package com.ssau.Hostel7.service.servceImpl;
 import com.ssau.Hostel7.dto.request.HostelResidentRequestDto;
 import com.ssau.Hostel7.dto.response.HostelResidentResponseDto;
 import com.ssau.Hostel7.exception.EntityNotFoundException;
-import com.ssau.Hostel7.exception.RoomTypeMismatchException;
 import com.ssau.Hostel7.helper.DtoUtils;
 import com.ssau.Hostel7.helper.holders.ErrorMessagesHolder;
 import com.ssau.Hostel7.model.CheckInQueue;
@@ -60,9 +59,6 @@ public class HostelResidentServiceImpl implements HostelResidentService {
         Room room = roomOptional.orElseThrow(() ->
                 new EntityNotFoundException(errorMessages.getEntityNotFound())
         );
-        if (room.getRoomType() != profile.getPreferredRoomType()) {
-            throw new RoomTypeMismatchException(errorMessages.getRoomTypeMismatch());
-        }
 
         HostelResident hostelResident = new HostelResident(
                 null,

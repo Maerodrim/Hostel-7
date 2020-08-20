@@ -1,8 +1,10 @@
 package com.ssau.Hostel7.service.servceImpl;
 
 import com.ssau.Hostel7.exception.EntityNotFoundException;
+import com.ssau.Hostel7.exception.RoomTypeMismatchException;
 import com.ssau.Hostel7.helper.holders.ErrorMessagesHolder;
 import com.ssau.Hostel7.model.HostelResident;
+import com.ssau.Hostel7.model.Profile;
 import com.ssau.Hostel7.model.Room;
 import com.ssau.Hostel7.model.RoomMigration;
 import com.ssau.Hostel7.model.enumModel.ConfirmationStatus;
@@ -39,6 +41,10 @@ public class MigrationServiceImpl implements MigrationService {
     public void startMigration(HostelResident resident, Room room) {
         if (room.getIdRoom() == null || resident.getId() == null) {
             throw new IllegalArgumentException("Entity not saved!");
+        }
+        Profile profile = resident.getProfile();
+        if (room.getRoomType() != profile.getPreferredRoomType()) {
+            throw new RoomTypeMismatchException(errorMessages.getRoomTypeMismatch());
         }
 
         RoomMigration roomMigration;
