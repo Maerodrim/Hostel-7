@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.sql.Time;
+import java.sql.Date;
 import java.util.UUID;
 
 /**
@@ -28,15 +28,15 @@ public class DormitoryPayment {
     @Column(name = "idHostelResident", unique = false, nullable = true)
     @JsonView(View.Room.class)
     private Integer idHostel;
-    @Column(name = "End Period", unique = false, nullable = true)
+    @Column(name = "End_Period", unique = false, nullable = true)
     @JsonView(View.Hostel.class)
-    private Time endPeriod;
-    @Column(name = "Start Period", unique = false, nullable = true)
+    private Date endPeriod;
+    @Column(name = "Start_Period", unique = false, nullable = true)
     @JsonView(View.Hostel.class)
-    private Time startPeriod;
+    private Date startPeriod;
     @Column(name = "Day", unique = false, nullable = true)
     @JsonView(View.Hostel.class)
-    private Time day;
+    private Date day;
     @Column(name = "Сonfirmation", unique = false, nullable = true)
     @JsonView(View.CheckInQueue.class)
     private ConfirmationStatus status;

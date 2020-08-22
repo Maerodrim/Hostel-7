@@ -35,11 +35,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
+                    .antMatchers(UrlsConstants.REGISTRATION).permitAll()
                     .anyRequest().authenticated()
                 .and()
                 .formLogin()
                     .permitAll()
-                    .loginPage(UrlsConstants.LOGIN_URL)
                     .successHandler(jwtAuthenticationSuccessHandler)
                 .and()
                 .logout()

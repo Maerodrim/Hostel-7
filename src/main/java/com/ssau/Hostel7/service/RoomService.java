@@ -5,6 +5,6 @@ import com.ssau.Hostel7.model.enumModel.RoomType;
 
 public interface RoomService {
 
-    RoomResponseDto getRandomRoom(RoomType roomType);
+    RoomResponseDto getRandomSpareRoom(RoomType roomType);
 
 }

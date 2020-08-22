@@ -22,7 +22,7 @@ public interface RoomRepository extends CrudRepository<Room, UUID> {
             "from Room r " +
             "where " +
                 "r.roomType = :room_type " +
-                "and r.roomSize < (" +
+                "and r.roomSize > (" +
                     "select count(m) from RoomMigration m where m.idRoom = r.idRoom and m.endDay is null" +
                 ")"
     )

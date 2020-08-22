@@ -25,7 +25,7 @@ public class SettlingController {
 
     private final SettlingService settlingService;
 
-    @PostMapping(SETTLING)
+    @PostMapping
     public SettlingResponseDto settled(Principal principal) {
         String mail = principal.getName();
         return settlingService.saveSettler(mail);

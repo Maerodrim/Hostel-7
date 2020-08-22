@@ -34,7 +34,7 @@ public class HostelResident {
     /**
      * Номер студенческого билета.
      */
-    @Column(name = "Student ID Number", unique = true, nullable = true)
+    @Column(name = "Student_ID_Number", unique = true, nullable = true)
     private String studentIDNumber;
 
     /**
@@ -46,7 +46,7 @@ public class HostelResident {
     /**
      * Номер группы.
      */
-    @Column(name = "Group number", unique = false, nullable = true)
+    @Column(name = "Group_number", unique = false, nullable = true)
     private String groupNumber;
 
     /**

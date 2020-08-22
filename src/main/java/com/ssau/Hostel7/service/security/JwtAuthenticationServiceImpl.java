@@ -33,7 +33,7 @@ public class JwtAuthenticationServiceImpl implements JwtAuthenticationService {
 
         long expirationAtMs = issuedAtMs + jwtConstants.getExpirationTimeMs();
 
-        claims.put(userDetails.getId().toString(), jwtConstants.getIdJsonFieldName());
+        claims.put(jwtConstants.getIdJsonFieldName(), userDetails.getId().toString());
 
         return Jwts.builder()
                 .setClaims(claims)

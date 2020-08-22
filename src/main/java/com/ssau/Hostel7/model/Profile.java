@@ -20,7 +20,7 @@ import java.util.UUID;
  * Сущность профиля.
  */
 @Entity
-@Table(name = "Profile")
+@Table(name = "profile")
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
@@ -36,49 +36,49 @@ public class Profile {
     /**
      * Имя.
      */
-    @Column(name = "name", unique = false, nullable = true)
+    @Column(name = "name", nullable = false)
     @JsonView(View.HostelResident.class)
     private String name;
 
     /**
      * Фамилия.
      */
-    @Column(name = "surname", unique = false, nullable = true)
+    @Column(name = "surname", nullable = false)
     @JsonView(View.HostelResident.class)
     private String surname;
 
     /**
-     * Ебатчество.
+     * Отчество.
      */
-    @Column(name = "patronymic", unique = false, nullable = true)
+    @Column(name = "patronymic")
     @JsonView(View.HostelResident.class)
     private String patronymic;
 
     /**
      * Логин.
      */
-    @Column(name = "mail", unique = true, nullable = true)
+    @Column(name = "mail", nullable = false)
     @JsonView(View.HostelResident.class)
     private String mail;
 
     /**
      * Тип комнаты по половой принадлежности.
      */
-    @Column(name = "gender", unique = true, nullable = true)
+    @Column(name = "preferred_room_type", nullable = false)
     @JsonView(View.HostelResident.class)
     private RoomType preferredRoomType;
 
     /**
      * Поролб.
      */
-    @Column(name = "Password", unique = false, nullable = true)
+    @Column(name = "Password", nullable = false)
     @JsonView(View.Protected.class)
     private String password;
 
     /**
      * Роль.
      */
-    @Column(name = "role", unique = false, nullable = true)
+    @Column(name = "role", nullable = false)
     @JsonView(View.HostelResident.class)
     private Role role;
 

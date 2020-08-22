@@ -5,7 +5,8 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 
-import java.sql.Time;
+import java.util.Date;
+
 
 @Data
 @AllArgsConstructor
@@ -19,7 +20,7 @@ public class CheckInQueueResponseDto {
     private SettlingResponseDto settler;
 
     @JsonProperty("time")
-    private Time time;
+    private Date time;
 
     @JsonProperty("is_settled")
     private Boolean isSettled;

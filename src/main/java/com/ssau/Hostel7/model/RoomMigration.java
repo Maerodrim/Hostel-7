@@ -8,8 +8,12 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.*;
-import java.sql.Time;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.PrePersist;
+import javax.persistence.Table;
+import java.util.Date;
 import java.util.UUID;
 
 @Entity
@@ -22,16 +26,16 @@ public class RoomMigration {
     @Id
     @JsonView(View.RoomMigration.class)
     private UUID idRoomMigration;
-    @Column(name = "Start Day", unique = false, nullable = true)
+    @Column(name = "Start_Day", unique = false, nullable = true)
     @JsonView(View.Hostel.class)
-    private Time startDay;
-    @Column(name = "End Day", unique = false, nullable = true)
+    private Date startDay;
+    @Column(name = "End_Day", unique = false, nullable = true)
     @JsonView(View.Hostel.class)
-    private Time endDay;
-    @Column(name = "Hostel Resident Id", unique = false, nullable = true)
+    private Date endDay;
+    @Column(name = "Hostel_Resident_Id", unique = false, nullable = true)
     @JsonView(View.Hostel.class)
     private UUID idHostelResident;
-    @Column(name = "Room Id", unique = false, nullable = true)
+    @Column(name = "Room_Id", unique = false, nullable = true)
     @JsonView(View.Hostel.class)
     private UUID idRoom;
     @Column(name = "Сonfirmation", unique = false, nullable = true)

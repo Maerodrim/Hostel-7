@@ -15,8 +15,7 @@ import com.ssau.Hostel7.service.MigrationService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.sql.Time;
-import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -50,7 +49,7 @@ public class MigrationServiceImpl implements MigrationService {
         RoomMigration roomMigration;
         roomMigration = new RoomMigration(
                 null,
-                Time.valueOf(String.valueOf(LocalDateTime.now())),
+                new Date(),
                 null,
                 resident.getId(),
                 room.getIdRoom(),
@@ -69,7 +68,7 @@ public class MigrationServiceImpl implements MigrationService {
         ));
 
         RoomMigration roomMigration = roomMigrationRepository.findByIdHostelResidentAndIdRoomAndEndDayIsNull(idHostelResident,room.getIdRoom());
-        roomMigration.setEndDay(Time.valueOf(String.valueOf(LocalDateTime.now())));
+        roomMigration.setEndDay(new Date());
         roomMigrationRepository.save(roomMigration);
     }
 }

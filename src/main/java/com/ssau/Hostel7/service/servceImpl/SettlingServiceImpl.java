@@ -20,8 +20,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.sql.Time;
-import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
@@ -94,7 +93,7 @@ public class SettlingServiceImpl implements SettlingService {
         CheckInQueue checkInQueue = new CheckInQueue(
                 null,
                 settler,
-                Time.valueOf(String.valueOf(LocalDateTime.now())),
+                new Date(),
                 false
         );
         //TODO возвращать номер в очереди

@@ -15,9 +15,9 @@ public class RoomController {
 
     private final RoomService roomService;
 
-    @GetMapping(UrlsConstants.ROOM_RANDOM_URL + "/{type}")
-    public RoomResponseDto getRandomRoom(@PathVariable("type") RoomType type) {
-        return roomService.getRandomRoom(type);
+    @GetMapping(UrlsConstants.RANDOM_SPARE_ROOM_URL + "/{type}")
+    public RoomResponseDto getRandomSpareRoom(@PathVariable("type") RoomType type) {
+        return roomService.getRandomSpareRoom(type);
     }
 
 }

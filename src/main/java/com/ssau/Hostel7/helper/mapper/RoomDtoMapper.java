@@ -14,7 +14,7 @@ public interface RoomDtoMapper {
             target = "id",
             expression = "java(room.getIdRoom() == null " +
                     "? null " +
-                    ": room.getId().toString())"
+                    ": room.getIdRoom().toString())"
     )
     @Mapping(
             target = "hostelId",

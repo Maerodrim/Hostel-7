@@ -13,5 +13,5 @@ public interface UrlsConstants {
     String ADMIN = "admin";
     String HOSTEL = "hostel";
     String ROOM_URL = "/room";
-    String ROOM_RANDOM_URL = ROOM_URL + "/random";
+    String RANDOM_SPARE_ROOM_URL = ROOM_URL + "/random";
 }

@@ -25,7 +25,7 @@ public class RoomServiceImpl implements RoomService {
 
     @Override
     @Transactional(readOnly = true)
-    public RoomResponseDto getRandomRoom(RoomType roomType) {
+    public RoomResponseDto getRandomSpareRoom(RoomType roomType) {
         List<UUID> unoccupiedRooms = roomRepository.findAllUnoccupiedRoomsByRoomType(roomType);
 
         UUID randomRoomId = randomIdFromList(unoccupiedRooms);

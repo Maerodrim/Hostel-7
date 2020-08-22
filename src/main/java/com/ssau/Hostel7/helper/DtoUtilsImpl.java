@@ -34,8 +34,9 @@ public class DtoUtilsImpl implements DtoUtils {
 
     @Override
     public Profile getProfile(ProfileRequestDto dto) {
+        UUID id = dto.getId() == null ? null : UUID.fromString(dto.getId());
         Profile profile = new Profile(
-                UUID.fromString(dto.getId()),
+                id,
                 dto.getName(),
                 dto.getSurname(),
                 dto.getPatronymic(),
@@ -74,7 +75,6 @@ public class DtoUtilsImpl implements DtoUtils {
                 )
                 .login(profile.getMail())
                 .name(profile.getName())
-                .password(profile.getPassword())
                 .patronymic(profile.getPatronymic())
                 .role(profile.getRole())
                 .status(settler.getStatus())

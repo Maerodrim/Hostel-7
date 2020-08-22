@@ -14,7 +14,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.PrePersist;
 import javax.persistence.Table;
-import java.sql.Time;
+import java.util.Date;
 import java.util.UUID;
 
 @Entity
@@ -27,18 +27,18 @@ public class CheckInQueue {
     @Id
     private UUID id;
 
-    @JoinColumn(name = "Settling In Dorms", unique = false, nullable = true)
+    @JoinColumn(name = "Settling_In_Dorms", unique = false, nullable = true)
     @OneToOne
     private SettlingInDorms settler;
 
     @Column(name = "Time", unique = false, nullable = true)
     @JsonView(View.CheckInQueue.class)
-    private Time time;
+    private Date time;
 
     /**
      * true - заселён.
      */
-    @Column(name = "Check-in status", unique = false, nullable = true)
+    @Column(name = "Check_in_status", unique = false, nullable = true)
     @JsonView(View.CheckInQueue.class)
     private Boolean isSettled;
 

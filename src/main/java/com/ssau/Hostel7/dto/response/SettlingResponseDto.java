@@ -38,8 +38,5 @@ public class SettlingResponseDto {
     
     @JsonView(View.CheckInQueue.class)
     private Status status;
-
-    @JsonView(View.Protected.class)
-    private String password;
     
 }

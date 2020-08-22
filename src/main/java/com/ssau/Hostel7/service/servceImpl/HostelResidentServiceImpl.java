@@ -1,6 +1,6 @@
 package com.ssau.Hostel7.service.servceImpl;
 
-import com.ssau.Hostel7.dto.request.HostelResidentRequestDto;
+import com.ssau.Hostel7.dto.request.RegisterResidentRequestDto;
 import com.ssau.Hostel7.dto.response.HostelResidentResponseDto;
 import com.ssau.Hostel7.exception.EntityNotFoundException;
 import com.ssau.Hostel7.helper.DtoUtils;
@@ -46,7 +46,8 @@ public class HostelResidentServiceImpl implements HostelResidentService {
     private final Logger logger = LoggerFactory.getLogger(HostelResidentServiceImpl.class);
 
     @Override
-    public HostelResidentResponseDto registerResident(HostelResidentRequestDto dto, String roomId) {
+    public HostelResidentResponseDto registerResident(RegisterResidentRequestDto dto, String roomId) {
+        //TODO передавать только Id заселяемого
         UUID settlerId = UUID.fromString(dto.getSettlerId());
         Optional<SettlingInDorms> settlerOpt = settlingInDormsRepository.findById(settlerId);
         SettlingInDorms settler = settlerOpt.orElseThrow(() ->
@@ -62,10 +63,10 @@ public class HostelResidentServiceImpl implements HostelResidentService {
 
         HostelResident hostelResident = new HostelResident(
                 null,
-                dto.getStudentIDNumber(),
+                null,
                 dto.getContractIdNumber(),
-                dto.getGroupNumber(),
-                dto.getPassNumber(),
+                null,
+                null,
                 profile
         );
 
