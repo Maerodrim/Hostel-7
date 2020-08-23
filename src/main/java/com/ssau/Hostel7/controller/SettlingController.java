@@ -32,15 +32,20 @@ public class SettlingController {
     }
 
     @JsonView(View.CheckInQueue.class)
-    @GetMapping(GET + QUEUE)
+    @GetMapping(QUEUE)
     public Set<CheckInQueueResponseDto> getQueueSettlingInDorms() {
         //TODO Pagination
         Set<CheckInQueueResponseDto> result = settlingService.getSettlersQueue();
         return result;
     }
 
+    @GetMapping(LAST_QUEUE)
+    public SettlingResponseDto getLastSettleInQueue() {
+        return settlingService.getLastSettlerInQueue();
+    }
+
     @JsonView(View.CheckInQueue.class)
-    @GetMapping(GET + ID_PATH)
+    @GetMapping(ID_PATH)
     public SettlingResponseDto getSettlingInDorms(@PathVariable("id") UUID id) {
         return settlingService.getSettlerById(id);
     }

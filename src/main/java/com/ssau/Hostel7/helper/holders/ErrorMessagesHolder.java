@@ -14,4 +14,7 @@ public class ErrorMessagesHolder {
     @Value("${room.type.mismatch}")
     private String roomTypeMismatch;
 
+    @Value("${settler.already_settled}")
+    private String alreadySettled;
+
 }

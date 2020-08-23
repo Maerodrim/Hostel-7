@@ -15,6 +15,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 import java.util.UUID;
@@ -34,6 +35,7 @@ public class ProfileServiceImpl implements ProfileService {
     private final Logger logger = LoggerFactory.getLogger(ProfileServiceImpl.class);
 
     @Override
+    @Transactional(readOnly = true)
     public CustomUserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         Optional<Profile> profileOpt = profileRepository.findByMail(username);
         Profile profile = profileOpt.orElseThrow(() -> {
@@ -48,6 +50,7 @@ public class ProfileServiceImpl implements ProfileService {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public CustomUserDetails loadUserById(UUID id) throws UsernameNotFoundException {
         Optional<Profile> profileOpt = profileRepository.findById(id);
         Profile profile = profileOpt.orElseThrow(() -> {
@@ -62,9 +65,9 @@ public class ProfileServiceImpl implements ProfileService {
     }
 
     @Override
+    @Transactional
     public ProfileResponseDto register(ProfileRequestDto dto) {
-        Profile profile = dtoUtils.getProfile(dto);
-        profile.setRole(getDefaultRole());
+        Profile profile = dtoUtils.getProfile(dto, getDefaultRole());
 
         //Сначала кодируем пароль, потом проверяем существование пользователя.
         String encodedPas = passwordEncoder.encode(profile.getPassword());

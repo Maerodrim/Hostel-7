@@ -76,6 +76,20 @@ public class SettlingServiceImpl implements SettlingService {
     }
 
     @Override
+    @Transactional(readOnly = true)
+    public SettlingResponseDto getLastSettlerInQueue() {
+        Optional<CheckInQueue> firstQueue = checkInQueueRepository.findFirstByIsSettledIsFalseOrderByTimeDesc();
+        if (!firstQueue.isPresent()) {
+            return null;
+        }
+        CheckInQueue checkInQueue = firstQueue.get();
+
+        SettlingInDorms first = checkInQueue.getSettler();
+        return dtoUtils.getSettlingResponseDto(first);
+    }
+
+    @Override
+    @Transactional(readOnly = true)
     public SettlingResponseDto getSettlerById(UUID id) {
         Optional<SettlingInDorms> settlerOpt = settlingInDormsRepository.findById(id);
         SettlingInDorms settler = settlerOpt.orElseThrow(() -> {

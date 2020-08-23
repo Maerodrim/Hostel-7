@@ -17,6 +17,8 @@ public interface SettlingService {
 
     Set<CheckInQueueResponseDto> getSettlersQueue();
 
+    SettlingResponseDto getLastSettlerInQueue();
+
     SettlingResponseDto getSettlerById(UUID id);
 
 }

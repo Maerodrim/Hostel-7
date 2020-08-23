@@ -12,11 +12,12 @@ import com.ssau.Hostel7.model.HostelResident;
 import com.ssau.Hostel7.model.Profile;
 import com.ssau.Hostel7.model.Room;
 import com.ssau.Hostel7.model.SettlingInDorms;
+import com.ssau.Hostel7.model.enumModel.Role;
 import com.ssau.Hostel7.model.enumModel.Status;
 
 public interface DtoUtils {
 
-    Profile getProfile(ProfileRequestDto dto);
+    Profile getProfile(ProfileRequestDto dto, Role role);
 
     SettlingInDorms getSettling(
             Status status,

@@ -5,9 +5,9 @@ public interface UrlsConstants {
     String LOGOUT_URL = "/logout";
     String ID_PATH = "/{id}";
     String SETTLING = "/settling";
-    String GET = "/get";
     String REGISTRATION = "/registration";
     String QUEUE = "/queue";
+    String LAST_QUEUE = QUEUE + "/last";
     String RESIDENT ="resident";
     String ROOM_ID_PATH = "/{room_id}";
     String ADMIN = "admin";

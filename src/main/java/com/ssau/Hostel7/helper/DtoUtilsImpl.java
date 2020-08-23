@@ -15,6 +15,7 @@ import com.ssau.Hostel7.model.HostelResident;
 import com.ssau.Hostel7.model.Profile;
 import com.ssau.Hostel7.model.Room;
 import com.ssau.Hostel7.model.SettlingInDorms;
+import com.ssau.Hostel7.model.enumModel.Role;
 import com.ssau.Hostel7.model.enumModel.Status;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -33,7 +34,7 @@ public class DtoUtilsImpl implements DtoUtils {
     private final RoomDtoMapper roomDtoMapper;
 
     @Override
-    public Profile getProfile(ProfileRequestDto dto) {
+    public Profile getProfile(ProfileRequestDto dto, Role role) {
         UUID id = dto.getId() == null ? null : UUID.fromString(dto.getId());
         Profile profile = new Profile(
                 id,
@@ -43,7 +44,7 @@ public class DtoUtilsImpl implements DtoUtils {
                 dto.getMail(),
                 dto.getPreferredRoomType(),
                 dto.getPassword(),
-                null
+                role
         );
 
         return profile;
@@ -110,7 +111,7 @@ public class DtoUtilsImpl implements DtoUtils {
                 .id(profile.getId())
                 .login(profile.getMail())
                 .passwordHash(profile.getPassword())
-                .role(profile.getRole().name())
+                .role(profile.getRole().getPrefixedValue())
                 .build();
         return result;
     }

@@ -16,7 +16,7 @@ import java.util.UUID;
 @Builder
 public class CustomUserDetails implements UserDetails {
 
-    public static final String ROLE_PREFIX = "_ROLE";
+    public static final String ROLE_PREFIX = "ROLE_";
 
     private String login;
 

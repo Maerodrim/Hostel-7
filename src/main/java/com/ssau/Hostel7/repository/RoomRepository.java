@@ -14,7 +14,7 @@ import java.util.UUID;
 @Repository
 @Table(name = "Room")
 public interface RoomRepository extends CrudRepository<Room, UUID> {
-    Room findByIdHostelAndAndNumberRoom(UUID id,Integer number);
+    Room findByIdHostelAndNumberRoom(UUID id,Integer number);
 
     @Query(
             "select " +
